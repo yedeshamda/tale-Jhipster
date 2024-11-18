@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20240212155501"
+  },
+  "applications": "*",
+  "entityTableName": "survey_participant",
+  "fields": [
+    {
+      "fieldName": "participantId",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "SurveyParticipant",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "survey",
+      "otherEntityRelationshipName": "participants",
+      "relationshipName": "surveys",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

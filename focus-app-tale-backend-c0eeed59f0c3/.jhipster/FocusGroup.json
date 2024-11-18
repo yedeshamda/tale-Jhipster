@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20240212155601"
+  },
+  "applications": "*",
+  "entityTableName": "focus_group",
+  "fields": [
+    {
+      "fieldName": "focusGroupId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userCategory",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "FocusGroup",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no"
+}

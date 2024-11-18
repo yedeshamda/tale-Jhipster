@@ -1,0 +1,282 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Alido (generated)" id="1709807443538-43">
+        <dropForeignKeyConstraint baseTableName="rel_normal_user__participated_survey" constraintName="fk_rel_normal_user__participated_survey__normal_user_id"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-44">
+        <dropForeignKeyConstraint baseTableName="rel_normal_user__participated_survey" constraintName="fk_rel_normal_user__participated_survey__participated_survey_id"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-4">
+        <createTable tableName="company">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="companyPK"/>
+            </column>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="company_id" type="INTEGER"/>
+            <column name="company_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="industry" type="VARCHAR(255)"/>
+            <column name="number_of_employees" type="INTEGER"/>
+            <column name="revenue" type="FLOAT4"/>
+            <column name="status" type="INTEGER"/>
+            <column name="website" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-5">
+        <createTable tableName="company_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="company_userPK"/>
+            </column>
+            <column name="company_user_id" type="INTEGER"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="job_title" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="phone_number" type="VARCHAR(255)"/>
+            <column name="status" type="INTEGER"/>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-6">
+        <createTable tableName="focus_group">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="focus_groupPK"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="end_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="focus_group_id" type="INTEGER"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="start_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="status" type="INTEGER"/>
+            <column name="user_category" type="VARCHAR(255)"/>
+            <column name="company_id" type="BIGINT"/>
+            <column name="normal_user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-7">
+        <createTable tableName="point_spend_option">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="point_spend_optionPK"/>
+            </column>
+            <column name="available_quantity" type="INTEGER"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="expiration_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="points_required" type="INTEGER"/>
+            <column name="redemption_option_id" type="INTEGER"/>
+            <column name="normal_user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-8">
+        <createTable tableName="point_transaction">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="point_transactionPK"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="points" type="INTEGER"/>
+            <column name="transaction_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="transaction_id" type="INTEGER"/>
+            <column name="user_id" type="INTEGER"/>
+            <column name="normal_user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-9">
+        <createTable tableName="quiz_progress">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="quiz_progressPK"/>
+            </column>
+            <column name="completed_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="progress" type="FLOAT4"/>
+            <column name="quiz_progress_id" type="INTEGER"/>
+            <column name="started_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="survey_id" type="INTEGER"/>
+            <column name="user_id" type="INTEGER"/>
+            <column name="normal_user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-10">
+        <createTable tableName="rel_company_user__user_roles">
+            <column name="company_user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="rel_company_user__user_rolesPK"/>
+            </column>
+            <column name="user_roles_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="rel_company_user__user_rolesPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-11">
+        <createTable tableName="rel_survey__participants">
+            <column name="survey_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="rel_survey__participantsPK"/>
+            </column>
+            <column name="participants_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="rel_survey__participantsPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-12">
+        <createTable tableName="survey_insight">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="survey_insightPK"/>
+            </column>
+            <column name="created_by_user_id" type="INTEGER"/>
+            <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="insight_id" type="INTEGER"/>
+            <column name="insights" type="VARCHAR(255)"/>
+            <column name="survey_id" type="INTEGER"/>
+            <column name="company_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-13">
+        <createTable tableName="survey_participant">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="survey_participantPK"/>
+            </column>
+            <column name="participant_id" type="INTEGER"/>
+            <column name="normal_user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-14">
+        <createTable tableName="survey_requirement">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="survey_requirementPK"/>
+            </column>
+            <column name="created_by_user_company_id" type="INTEGER"/>
+            <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="requirement_description" type="VARCHAR(255)"/>
+            <column name="requirement_id" type="INTEGER"/>
+            <column name="survey_id" type="INTEGER"/>
+            <column name="company_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-15">
+        <createTable tableName="user_company_role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_company_rolePK"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="role_id" type="INTEGER"/>
+            <column name="role_name" type="VARCHAR(255)"/>
+            <column name="status" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-16">
+        <addColumn tableName="survey">
+            <column name="company_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-17">
+        <addColumn tableName="survey">
+            <column name="created_by_user_id" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-18">
+        <addColumn tableName="survey">
+            <column name="created_date" type="timestamp(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-19">
+        <addColumn tableName="survey">
+            <column name="description" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-20">
+        <addColumn tableName="normal_user">
+            <column name="earned_points" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-21">
+        <addColumn tableName="survey">
+            <column name="end_date" type="timestamp(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-22">
+        <addColumn tableName="survey">
+            <column name="start_date" type="timestamp(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-23">
+        <addColumn tableName="normal_user">
+            <column name="status" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-24">
+        <addColumn tableName="survey">
+            <column name="status" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-25">
+        <addColumn tableName="survey">
+            <column name="survey_insights_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-26">
+        <addColumn tableName="survey">
+            <column name="survey_requirements_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-27">
+        <addForeignKeyConstraint baseColumnNames="normal_user_id" baseTableName="point_transaction" constraintName="FK1ywhp0qc2aituk8fttbjy5cge" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="normal_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-28">
+        <addForeignKeyConstraint baseColumnNames="normal_user_id" baseTableName="survey_participant" constraintName="FK5a39b3wl6ejou16wf0n77ot8e" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="normal_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-29">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="survey_insight" constraintName="FK5acg6fyx9rcioek2xdq6m400l" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="company" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-30">
+        <addForeignKeyConstraint baseColumnNames="user_roles_id" baseTableName="rel_company_user__user_roles" constraintName="FK8aj42w954axxo2r1ptr5oel7v" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user_company_role" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-31">
+        <addForeignKeyConstraint baseColumnNames="survey_insights_id" baseTableName="survey" constraintName="FK9mnbc74wlri0ihs5aqjb42yaa" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="survey_insight" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-32">
+        <addForeignKeyConstraint baseColumnNames="survey_id" baseTableName="rel_survey__participants" constraintName="FKaxor3t3ewpb1oy54kn2o0yaay" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="survey" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-33">
+        <addForeignKeyConstraint baseColumnNames="survey_requirements_id" baseTableName="survey" constraintName="FKbfenve5iylvmsuccteu9f21s1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="survey_requirement" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-34">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="company_user" constraintName="FKby7i4fqhd2jvje6rvc5vc5837" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="company" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-35">
+        <addForeignKeyConstraint baseColumnNames="company_user_id" baseTableName="rel_company_user__user_roles" constraintName="FKdcfx4879p1bvsyh6f27w0vurl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="company_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-36">
+        <addForeignKeyConstraint baseColumnNames="participants_id" baseTableName="rel_survey__participants" constraintName="FKeq0e0ng4enxdky7cgddjflbn4" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="survey_participant" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-37">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="survey_requirement" constraintName="FKfks89s3bbmxk1n0q94owu5ibo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="company" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-38">
+        <addForeignKeyConstraint baseColumnNames="normal_user_id" baseTableName="point_spend_option" constraintName="FKjrvqb8tnpua0x0gcpn1tcepc9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="normal_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-39">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="survey" constraintName="FKo5sdismkcu0pgey32yc98eo12" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="company" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-40">
+        <addForeignKeyConstraint baseColumnNames="normal_user_id" baseTableName="quiz_progress" constraintName="FKpw4dh0s9syds458xq16jefovu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="normal_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-41">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="focus_group" constraintName="FKqwks6nowmiguk8ors2oyl8dpi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="company" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-42">
+        <addForeignKeyConstraint baseColumnNames="normal_user_id" baseTableName="focus_group" constraintName="FKs95jl716ls44s1r9h42e2hwgu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="normal_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-45">
+        <dropTable tableName="rel_normal_user__participated_survey"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-1">
+        <modifyDataType columnName="email" newDataType="varchar(254)" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-2">
+        <modifyDataType columnName="id" newDataType="varchar(255)" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Alido (generated)" id="1709807443538-3">
+        <modifyDataType columnName="user_id" newDataType="varchar(255)" tableName="jhi_user_authority"/>
+    </changeSet>
+</databaseChangeLog>

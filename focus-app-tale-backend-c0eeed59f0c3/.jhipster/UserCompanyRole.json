@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20240212160101"
+  },
+  "applications": "*",
+  "entityTableName": "user_company_role",
+  "fields": [
+    {
+      "fieldName": "roleId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "roleName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "UserCompanyRole",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "companyUser",
+      "otherEntityRelationshipName": "userRoles",
+      "relationshipName": "companyUsers",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

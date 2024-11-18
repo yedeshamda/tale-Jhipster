@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20240212160401"
+  },
+  "applications": "*",
+  "entityTableName": "point_spend_option",
+  "fields": [
+    {
+      "fieldName": "redemptionOptionId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pointsRequired",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "availableQuantity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "expirationDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "name": "PointSpendOption",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no"
+}

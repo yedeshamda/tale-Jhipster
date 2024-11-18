@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20240212155701"
+  },
+  "applications": "*",
+  "entityTableName": "campaign",
+  "fields": [
+    {
+      "fieldName": "campaignId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "name": "Campaign",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "survey",
+      "relationshipName": "survey",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "analyticss",
+      "relationshipName": "analytics",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "normalUser",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

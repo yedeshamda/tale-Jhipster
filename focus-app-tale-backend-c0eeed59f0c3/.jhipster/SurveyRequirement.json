@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20240212160201"
+  },
+  "applications": "*",
+  "entityTableName": "survey_requirement",
+  "fields": [
+    {
+      "fieldName": "requirementId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "requirementDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "surveyId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdByUserCompanyId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "name": "SurveyRequirement",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no"
+}

@@ -1,0 +1,58 @@
+{
+  "annotations": {
+    "changelogDate": "20240212155901"
+  },
+  "applications": "*",
+  "entityTableName": "company_user",
+  "fields": [
+    {
+      "fieldName": "companyUserId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "username",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "jobTitle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "CompanyUser",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "userCompanyRole",
+      "otherEntityRelationshipName": "companyUsers",
+      "relationshipName": "userRoles",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

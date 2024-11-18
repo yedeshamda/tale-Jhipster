@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240212160101"
+  },
+  "applications": "*",
+  "entityTableName": "responses",
+  "fields": [
+    {
+      "fieldName": "responseId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "answer",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Responses",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "analyticss",
+      "relationshipName": "analytics",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

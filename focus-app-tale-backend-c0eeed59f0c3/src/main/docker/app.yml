@@ -1,0 +1,66 @@
+name: taleapp
+services:
+  app:
+    image: taleapp
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/taleApp
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/taleApp
+      - spring.jpa.show-sql=true
+      - spring.jpa.properties.hibernate.format_sql=true
+      - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=http://keycloak:9080/realms/jhipster
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=web_app
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=web_app
+      - spring.web.cors.allowed-origins=http://localhost:3000
+      - spring.web.cors.allowed-methods=GET,POST,PUT,DELETE,OPTIONS
+      - spring.web.cors.allowed-headers=*
+      - spring.web.cors.allow-credentials=true
+      - spring.servlet.multipart.enabled=true
+      - spring.servlet.multipart.max-file-size=10MB
+      - spring.servlet.multipart.max-request-size=10MB
+      - logging.level.org.springframework.web.cors=DEBUG
+      - logging.level.org.springframework.web.filter.CorsFilter=DEBUG
+      - DB_USER=taleApp
+      - DB_PASSWORD=yh09881592
+      - DB_HOST=postgresql
+      - DB_PORT=5432
+      - DB_DATABASE=taleApp
+    ports:
+      - 127.0.0.1:8080:8080
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8080/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+  postgresql:
+    image: postgres:16.1
+    # volumes:
+    #   - ~/volumes/jhipster/taleApp/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=taleApp
+      - POSTGRES_PASSWORD=taleApp
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
+    ports:
+      - 127.0.0.1:5432:5432
+  keycloak:
+    extends:
+      file: ./keycloak.yml
+      service: keycloak

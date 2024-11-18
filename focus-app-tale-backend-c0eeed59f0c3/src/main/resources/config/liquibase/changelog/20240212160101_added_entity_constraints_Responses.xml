@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Responses.
+    -->
+    <changeSet id="20240212160101-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="normal_user_id"
+                                 baseTableName="responses"
+                                 constraintName="fk_responses__normal_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="normal_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="survey_id"
+                                 baseTableName="responses"
+                                 constraintName="fk_responses__survey_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="survey"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="question_id"
+                                 baseTableName="responses"
+                                 constraintName="fk_responses__question_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="question"
+                                 />
+    </changeSet>
+</databaseChangeLog>

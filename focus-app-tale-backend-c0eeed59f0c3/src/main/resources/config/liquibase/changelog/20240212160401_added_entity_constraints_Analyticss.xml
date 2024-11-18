@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Analyticss.
+    -->
+    <changeSet id="20240212160401-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="campaign_id"
+                                 baseTableName="analyticss"
+                                 constraintName="fk_analyticss__campaign_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="campaign"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="section_id"
+                                 baseTableName="analyticss"
+                                 constraintName="fk_analyticss__section_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="section"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responses_id"
+                                 baseTableName="analyticss"
+                                 constraintName="fk_analyticss__responses_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="responses"
+                                 />
+    </changeSet>
+</databaseChangeLog>

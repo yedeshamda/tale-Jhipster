@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity CompanyUser.
+    -->
+    <changeSet id="20240212155901-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="company_user_id"
+                                 baseTableName="rel_company_user__user_roles"
+                                 constraintName="fk_rel_company_user__user_roles__company_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="user_roles_id"
+                                 baseTableName="rel_company_user__user_roles"
+                                 constraintName="fk_rel_company_user__user_roles__user_roles_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_company_role"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="company_user"
+                                 constraintName="fk_company_user__company_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"
+                                 />
+    </changeSet>
+</databaseChangeLog>

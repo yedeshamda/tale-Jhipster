@@ -1,0 +1,146 @@
+// Define entities
+entity NormalUser {
+    userId Integer,
+    username String,
+    email String,
+    firstname String,
+    lastname String,
+    age Integer,
+    job String,
+    gender String,
+    address String,
+    earnedPoints Integer,
+    status Integer // Active or Inactive
+}
+
+entity SurveyParticipant {
+    participantId Integer
+}
+
+entity FocusGroup {
+    focusGroupId Integer,
+    name String,
+    description String,
+    userCategory String,
+    startDate ZonedDateTime,
+    endDate ZonedDateTime,
+    status Integer //Active or Inactive
+}
+
+entity PointTransaction {
+    transactionId Integer,
+    description String,
+    points Integer,
+    transactionDate ZonedDateTime,
+    userId Integer
+}
+
+
+entity Company {
+    companyId Integer,
+    companyName String required,
+    industry String,
+    revenue Float,
+    numberOfEmployees Integer,
+    address String,
+    website String,
+    status Integer
+}
+
+
+entity CompanyUser {
+    companyUserId Integer,
+    username String required,
+    password String,
+    email String,
+    phoneNumber String,
+    firstName String,
+    lastName String,
+    jobTitle String,
+    status Integer
+}
+
+
+entity SurveyInsight {
+    insightId Integer,
+    insights String,
+    surveyId Integer,
+    createdByUserId Integer,
+    createdDate ZonedDateTime
+}
+
+
+entity UserCompanyRole {
+    roleId Integer,
+    roleName String,
+    description String,
+    status Integer
+}
+
+
+entity SurveyRequirement {
+    requirementId Integer,
+    requirementDescription String,
+    surveyId Integer,
+    createdByUserCompanyId Integer,
+    createdDate ZonedDateTime
+}
+
+
+entity Survey {
+    surveyId Integer,
+    title String,
+    description String,
+    startDate ZonedDateTime,
+    endDate ZonedDateTime,
+    createdByUserId Integer,
+    createdDate ZonedDateTime,
+    status Integer
+}
+
+
+entity QuizProgress {
+    quizProgressId Integer,
+    userId Integer,
+    surveyId Integer,
+    progress Float,
+    startedDate ZonedDateTime,
+    completedDate ZonedDateTime
+}
+
+
+entity PointSpendOption {
+    redemptionOptionId Integer,
+    description String,
+    pointsRequired Integer,
+    availableQuantity Integer,
+    expirationDate ZonedDateTime
+}
+
+
+// Define relationships
+relationship OneToMany {
+    NormalUser{participatedSurveys} to SurveyParticipant,
+    NormalUser{focusGroups} to FocusGroup,
+    NormalUser{pointTransactions} to PointTransaction,
+    NormalUser{quizProgresses} to QuizProgress,
+    NormalUser{redemptionOptions} to PointSpendOption,
+    Company{createdSurveys} to Survey,
+    Company{createdFocusGroups} to FocusGroup,
+    Company{surveyInsights} to SurveyInsight,
+    Company{companyUsers} to CompanyUser,
+    Company{surveyRequirements} to SurveyRequirement
+}
+
+relationship ManyToMany {
+    Survey{participants} to SurveyParticipant{surveys},
+    CompanyUser{userRoles} to UserCompanyRole{companyUsers}
+}
+
+relationship ManyToOne {
+    Survey{surveyRequirements} to SurveyRequirement,
+    Survey{surveyInsights} to SurveyInsight
+}
+
+// Set pagination options
+paginate * with pagination

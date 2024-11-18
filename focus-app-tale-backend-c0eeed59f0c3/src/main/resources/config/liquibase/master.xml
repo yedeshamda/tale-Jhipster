@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="floatType" value="float4" dbms="postgresql"/>
+    <property name="clobType" value="clob" dbms="postgresql"/>
+    <property name="blobType" value="blob" dbms="postgresql"/>
+    <property name="uuidType" value="uuid" dbms="postgresql"/>
+    <property name="datetimeType" value="datetime" dbms="postgresql"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155501_added_entity_NormalUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155601_added_entity_AdminUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155701_added_entity_Campaign.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155801_added_entity_Survey.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155901_added_entity_Section.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160001_added_entity_Question.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160101_added_entity_Responses.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160201_added_entity_OurDatabases.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160301_added_entity_Notification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160401_added_entity_Analyticss.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155501_added_entity_SurveyParticipant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155601_added_entity_FocusGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155701_added_entity_PointTransaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155801_added_entity_Company.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155901_added_entity_CompanyUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160001_added_entity_SurveyInsight.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160101_added_entity_UserCompanyRole.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160201_added_entity_SurveyRequirement.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160301_added_entity_QuizProgress.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160401_added_entity_PointSpendOption.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20240212155501_added_entity_constraints_NormalUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155701_added_entity_constraints_Campaign.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155801_added_entity_constraints_Survey.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155901_added_entity_constraints_Section.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160001_added_entity_constraints_Question.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160101_added_entity_constraints_Responses.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160301_added_entity_constraints_Notification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160401_added_entity_constraints_Analyticss.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155501_added_entity_constraints_SurveyParticipant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155601_added_entity_constraints_FocusGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155701_added_entity_constraints_PointTransaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212155901_added_entity_constraints_CompanyUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160001_added_entity_constraints_SurveyInsight.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160201_added_entity_constraints_SurveyRequirement.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160301_added_entity_constraints_QuizProgress.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240212160401_added_entity_constraints_PointSpendOption.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+</databaseChangeLog>

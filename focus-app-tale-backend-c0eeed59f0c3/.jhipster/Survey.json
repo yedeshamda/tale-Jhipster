@@ -1,0 +1,65 @@
+{
+  "annotations": {
+    "changelogDate": "20240212155801"
+  },
+  "applications": "*",
+  "entityTableName": "survey",
+  "fields": [
+    {
+      "fieldName": "surveyId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "createdByUserId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Survey",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "surveyRequirement",
+      "relationshipName": "surveyRequirements",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "surveyInsight",
+      "relationshipName": "surveyInsights",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "surveyParticipant",
+      "otherEntityRelationshipName": "surveys",
+      "relationshipName": "participants",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

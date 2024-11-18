@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20240212160001"
+  },
+  "applications": "*",
+  "entityTableName": "survey_insight",
+  "fields": [
+    {
+      "fieldName": "insightId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "insights",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "surveyId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdByUserId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "name": "SurveyInsight",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no"
+}

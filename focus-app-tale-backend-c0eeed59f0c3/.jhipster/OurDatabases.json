@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240212160201"
+  },
+  "applications": "*",
+  "entityTableName": "our_databases",
+  "fields": [
+    {
+      "fieldName": "databaseId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "name": "OurDatabases",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "survey",
+      "relationshipName": "surveyDatabase",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

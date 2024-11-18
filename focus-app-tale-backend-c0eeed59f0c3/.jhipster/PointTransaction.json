@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20240212155701"
+  },
+  "applications": "*",
+  "entityTableName": "point_transaction",
+  "fields": [
+    {
+      "fieldName": "transactionId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "points",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "transactionDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "userId",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "PointTransaction",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no"
+}

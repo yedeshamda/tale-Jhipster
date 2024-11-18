@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20240212160301"
+  },
+  "applications": "*",
+  "entityTableName": "quiz_progress",
+  "fields": [
+    {
+      "fieldName": "quizProgressId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "surveyId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "progress",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "startedDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "completedDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "name": "QuizProgress",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no"
+}

@@ -1,0 +1,125 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+#
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+logging:
+  level:
+    ROOT: DEBUG
+    tech.jhipster: DEBUG
+    org.hibernate.SQL: DEBUG
+    com.tale: DEBUG
+
+spring:
+  devtools:
+    restart:
+      enabled: true
+      additional-exclude: static/**
+    livereload:
+      enabled: false # we use Webpack dev server + BrowserSync for livereload
+  jackson:
+    serialization:
+      indent-output: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5433/taleappp
+    username: postgres
+    password: yh09881592
+    hikari:
+      poolName: Hikari
+      autoCommit: false
+
+  security:
+    oauth2:
+      client:
+        registration:
+          auth0:
+            client-id: YOUR_AUTH0_CLIENT_ID
+            client-secret: YOUR_AUTH0_CLIENT_SECRET
+            provider: auth0
+            scope: openid profile email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+        provider:
+          auth0:
+            authorization-uri: https://YOUR_AUTH0_DOMAIN/authorize
+            token-uri: https://YOUR_AUTH0_DOMAIN/oauth/token
+            user-info-uri: https://YOUR_AUTH0_DOMAIN/userinfo
+            user-name-attribute: preferred_username
+
+  #        provider:
+#          oidc:
+#            issuer-uri: http://localhost:9080/realms/jhipster
+#        registration:
+#          oidc:
+#            client-id: tale
+#            client-secret: 86a4RPOrgq6UNSwOJ0xMOGI5aiheCyKs
+#            scope: openid, profile, email, offline_access # last one for refresh tokens
+
+  web:
+    cors:
+      allowed-origins: "http://localhost:3000" # Replace with your frontend origin
+      allowed-methods: GET, POST, PUT, DELETE, OPTIONS
+      allowed-headers: "*"
+      allow-credentials: true
+
+liquibase:
+  change-log: classpath:config/liquibase/master.xml
+  contexts: faker
+  messages:
+    cache-duration: PT1S # 1 second, see the ISO 8601 standard
+  thymeleaf:
+    cache: false
+
+server:
+  port: 8080
+
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+  cache: # Cache configuration
+    ehcache: # Ehcache configuration
+      time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache
+      max-entries: 100 # Number of objects in each cache entry
+  # CORS is only enabled by default with the "dev" profile
+  cors:
+    # Allow Ionic for JHipster by default (* no longer allowed in Spring Boot 2.4+)
+    allowed-origins: 'http://localhost:8100,https://localhost:8100,http://localhost:9000,https://localhost:9000,https://localhost:3000'
+    # Enable CORS when running in GitHub Codespaces
+    allowed-origin-patterns: 'https://*.githubpreview.dev'
+    allowed-methods: '*'
+    allowed-headers: '*'
+    exposed-headers: 'Authorization,Link,X-Total-Count,X-${jhipster.clientApp.name}-alert,X-${jhipster.clientApp.name}-error,X-${jhipster.clientApp.name}-params'
+    allow-credentials: true
+    max-age: 1800
+  logging:
+    use-json-format: false # By default, logs are not in Json format
+    logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+      enabled: false
+      host: localhost
+      port: 5000
+      ring-buffer-size: 512
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration, like in the JHipsterProperties above
+#
+# More documentation is available at:
+# https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# application:

@@ -1,0 +1,21 @@
+{
+  "annotations": {
+    "changelogDate": "20240212160301"
+  },
+  "applications": "*",
+  "entityTableName": "notification",
+  "fields": [
+    {
+      "fieldName": "notificationId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "message",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Notification",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "no"
+}

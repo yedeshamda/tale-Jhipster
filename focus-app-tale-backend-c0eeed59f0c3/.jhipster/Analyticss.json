@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20240212160401"
+  },
+  "applications": "*",
+  "entityTableName": "analyticss",
+  "fields": [
+    {
+      "fieldName": "analyticsId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isready",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "insights",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Analyticss",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "no"
+}

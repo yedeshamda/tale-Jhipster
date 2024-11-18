@@ -1,0 +1,77 @@
+{
+  "annotations": {
+    "changelogDate": "20240212155801"
+  },
+  "applications": "*",
+  "entityTableName": "company",
+  "fields": [
+    {
+      "fieldName": "companyId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "companyName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "industry",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "revenue",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "numberOfEmployees",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "website",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Company",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "survey",
+      "relationshipName": "createdSurveys",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "focusGroup",
+      "relationshipName": "createdFocusGroups",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "surveyInsight",
+      "relationshipName": "surveyInsights",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "companyUser",
+      "relationshipName": "companyUsers",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "surveyRequirement",
+      "relationshipName": "surveyRequirements",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}
