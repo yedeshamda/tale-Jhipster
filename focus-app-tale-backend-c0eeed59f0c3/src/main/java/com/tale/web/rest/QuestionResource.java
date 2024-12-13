@@ -5,6 +5,8 @@ import com.tale.repository.QuestionRepository;
 import com.tale.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -53,15 +55,42 @@ public class QuestionResource {
     @PostMapping("")
     public ResponseEntity<Question> createQuestion(@RequestBody Question question) throws URISyntaxException {
         log.debug("REST request to save Question : {}", question);
+
+        // Check if the question has an ID, which should not happen for a new question
         if (question.getId() != null) {
             throw new BadRequestAlertException("A new question cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        // Assuming that the files field in the request body contains a base64 string
+        if (question.getFile() != null) {
+            try {
+                // Check if the file data starts with "data:image" to ensure it's a base64-encoded image
+                String base64String = new String(question.getFile(), StandardCharsets.UTF_8);
+
+                if (base64String.startsWith("data:image/")) {
+                    // Split the string at the comma (remove the "data:image/png;base64," part)
+                    base64String = base64String.split(",")[1];
+
+                    // Decode the base64 string into a byte array
+                    byte[] decodedBytes = Base64.getDecoder().decode(base64String);
+
+                    // Set the decoded byte array into the 'files' field
+                    question.setFile(decodedBytes);
+                }
+            } catch (IllegalArgumentException e) {
+                log.error("Invalid base64 string provided for file", e);
+                throw new BadRequestAlertException("Invalid file format", ENTITY_NAME, "invalidfile");
+            }
+        }
+
+        // Save the question in the database
         Question result = questionRepository.save(question);
         return ResponseEntity
             .created(new URI("/api/questions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
 
     /**
      * {@code PUT  /questions/:id} : Updates an existing question.

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.lang.Nullable;
 
 /**
  * A Company.
@@ -51,8 +52,9 @@ public class Company implements Serializable {
     @Column(name = "status")
     private Integer status;
 
+    @Nullable
     @Column(name = "logo") // New logo attribute
-    private String logo; // Assuming logo will be stored as a URL or path to the image
+    private byte[] logo; // Assuming logo will be stored as a URL or path to the image
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -202,16 +204,16 @@ public class Company implements Serializable {
     }
 
     // Getter and setter for logo
-    public String getLogo() {
+    public byte[] getLogo() {
         return logo;
     }
 
-    public Company logo(String logo) {
+    public Company logo(byte[] logo) {
         this.setLogo(logo);
         return this;
     }
 
-    public void setLogo(String logo) {
+    public void setLogo(byte[] logo) {
         this.logo = logo;
     }
 

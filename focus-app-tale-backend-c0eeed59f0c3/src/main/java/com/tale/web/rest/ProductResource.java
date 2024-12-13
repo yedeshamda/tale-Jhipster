@@ -21,6 +21,7 @@ import tech.jhipster.web.util.ResponseUtil;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -59,6 +60,13 @@ public class ProductResource {
         if (product.getId() != null) {
             throw new BadRequestAlertException("A new company cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        // Convert base64 logo back to byte array if present
+        byte[] logoBytes = null;
+        if (product.getLogo() != null && product.getLogo().length == 0) {
+            logoBytes = Base64.getDecoder().decode(product.getLogo());
+            product.setLogo(logoBytes);  // Save the byte array logo in the company entity
+        }
+
         Product result = productRepository.save(product);
         return ResponseEntity
             .created(new URI("/api/products/" + result.getId()))

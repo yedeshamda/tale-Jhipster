@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.lang.Nullable;
 
 /**
  * A Product.
@@ -30,8 +31,9 @@ public class Product implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Nullable
     @Column(name = "logo") // New logo attribute
-    private String logo; // Assuming logo will be stored as a URL or path to the image
+    private byte[] logo; // Assuming logo will be stored as a URL or path to the image
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "product" }, allowSetters = true)
@@ -65,17 +67,17 @@ public class Product implements Serializable {
         this.description = description;
         return this;
     }
-    // Getter and setter for logo
-    public String getLogo() {
-        return logo;
-    }
 
-    public Product logo(String logo) {
+    public Product logo(byte[] logo) {
         this.setLogo(logo);
         return this;
     }
 
-    public void setLogo(String logo) {
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    public void setLogo(byte[] logo) {
         this.logo = logo;
     }
 

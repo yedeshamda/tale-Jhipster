@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -53,17 +54,31 @@ public class CompanyResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Company> createCompany(@Valid @RequestBody Company company) throws URISyntaxException {
+    public ResponseEntity<Company> createCompany(@RequestBody Company company) throws URISyntaxException {
         log.debug("REST request to save Company : {}", company);
+
+        // Handle validation (e.g., check if company has an ID)
         if (company.getId() != null) {
             throw new BadRequestAlertException("A new company cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        // Convert base64 logo back to byte array if present
+        byte[] logoBytes = null;
+        if (company.getLogo() != null && company.getLogo().length == 0) {
+            logoBytes = Base64.getDecoder().decode(company.getLogo());
+            company.setLogo(logoBytes);  // Save the byte array logo in the company entity
+        }
+
+        // Save the company entity
         Company result = companyRepository.save(company);
+
+        // Return the created entity with a URI pointing to the created resource
         return ResponseEntity
             .created(new URI("/api/companies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
 
     /**
      * {@code PUT  /companies/:id} : Updates an existing company.

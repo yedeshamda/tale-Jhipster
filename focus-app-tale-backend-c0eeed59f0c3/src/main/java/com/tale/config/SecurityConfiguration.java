@@ -48,8 +48,14 @@ public class SecurityConfiguration {
 
     private final JHipsterProperties jHipsterProperties;
 
-    @Value("${spring.security.oauth2.client.provider.oidc.issuer-uri}")
+    @Value("${spring.security.oauth2.client.provider.auth0.issuer-uri}")
     private String issuerUri;
+
+    @Value("${spring.security.oauth2.client.registration.auth0.client-id}")
+    private String clientId;
+
+    @Value("${spring.security.oauth2.client.registration.auth0.client-secret}")
+    private String clientSecret;
 
     public SecurityConfiguration(JHipsterProperties jHipsterProperties) {
         this.jHipsterProperties = jHipsterProperties;
@@ -61,16 +67,17 @@ public class SecurityConfiguration {
             .cors(withDefaults())
             .csrf(csrf ->
                 csrf
+                    .ignoringRequestMatchers("/api/**")
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    // See https://stackoverflow.com/q/74447118/65681
                     .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
             )
             .addFilterAfter(new CookieCsrfFilter(), BasicAuthenticationFilter.class)
             .authorizeHttpRequests(authz ->
-                // prettier-ignore
                 authz
                     .requestMatchers(mvc.pattern("/api/authenticate")).permitAll()
                     .requestMatchers(mvc.pattern("/api/auth-info")).permitAll()
+                    .requestMatchers(mvc.pattern("/api")).permitAll()
+                    .requestMatchers(mvc.pattern("/api/surveys")).permitAll()
                     .requestMatchers(mvc.pattern("/api/admin/**")).hasAuthority(AuthoritiesConstants.ADMIN)
                     .requestMatchers(mvc.pattern("/api/**")).authenticated()
                     .requestMatchers(mvc.pattern("/v3/api-docs/**")).hasAuthority(AuthoritiesConstants.ADMIN)
@@ -80,9 +87,16 @@ public class SecurityConfiguration {
                     .requestMatchers(mvc.pattern("/management/prometheus")).permitAll()
                     .requestMatchers(mvc.pattern("/management/**")).hasAuthority(AuthoritiesConstants.ADMIN)
             )
-            .oauth2Login(oauth2 -> oauth2.userInfoEndpoint(userInfo -> userInfo.oidcUserService(this.oidcUserService())))
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(authenticationConverter())))
+            .oauth2Login(oauth2 ->
+                oauth2
+                    .userInfoEndpoint(userInfo -> userInfo.oidcUserService(this.oidcUserService()))
+            )
+            .oauth2ResourceServer(oauth2 ->
+                oauth2
+                    .jwt(jwt -> jwt.jwtAuthenticationConverter(authenticationConverter()))
+            )
             .oauth2Client(withDefaults());
+
         return http.build();
     }
 
@@ -119,20 +133,12 @@ public class SecurityConfiguration {
         };
     }
 
-    /**
-     * Map authorities from "groups" or "roles" claim in ID Token.
-     *
-     * @return a {@link GrantedAuthoritiesMapper} that maps groups from
-     * the IdP to Spring Security Authorities.
-     */
     @Bean
     public GrantedAuthoritiesMapper userAuthoritiesMapper() {
         return authorities -> {
             Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
 
             authorities.forEach(authority -> {
-                // Check for OidcUserAuthority because Spring Security 5.2 returns
-                // each scope as a GrantedAuthority, which we don't care about.
                 if (authority instanceof OidcUserAuthority) {
                     OidcUserAuthority oidcUserAuthority = (OidcUserAuthority) authority;
                     mappedAuthorities.addAll(SecurityUtils.extractAuthorityFromClaims(oidcUserAuthority.getUserInfo().getClaims()));
@@ -143,18 +149,14 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    JwtDecoder jwtDecoder(ClientRegistrationRepository clientRegistrationRepository, RestTemplateBuilder restTemplateBuilder) {
+    JwtDecoder jwtDecoder() {
         NimbusJwtDecoder jwtDecoder = JwtDecoders.fromOidcIssuerLocation(issuerUri);
-
-        OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(jHipsterProperties.getSecurity().getOauth2().getAudience());
+        OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(Collections.singletonList("http://localhost/api"));
         OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuerUri);
         OAuth2TokenValidator<Jwt> withAudience = new DelegatingOAuth2TokenValidator<>(withIssuer, audienceValidator);
-
         jwtDecoder.setJwtValidator(withAudience);
-        jwtDecoder.setClaimSetConverter(
-            new CustomClaimConverter(clientRegistrationRepository.findByRegistrationId("oidc"), restTemplateBuilder.build())
-        );
-
         return jwtDecoder;
     }
+
+
 }

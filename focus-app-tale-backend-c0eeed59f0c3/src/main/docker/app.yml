@@ -10,10 +10,14 @@ services:
       - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/taleApp
       - spring.jpa.show-sql=true
       - spring.jpa.properties.hibernate.format_sql=true
-      - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=http://keycloak:9080/realms/jhipster
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=web_app
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=web_app
-      - spring.web.cors.allowed-origins=http://localhost:3000
+      # Updated Auth0 configuration
+      - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=https://dev-8ja5z27gacw183vf.eu.auth0.com/
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=P5ePbyjmq6xLc09ZxshMaqkwcNmVbKNX
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=Z_-IVcH2g8uu1Euz63EbDtT6ZHlJ5P681-3wOwQHMyq-M_X9WuHqZzihKFX_hmt1
+      - spring.security.oauth2.client.provider.auth0.issuer-uri=https://dev-8ja5z27gacw183vf.eu.auth0.com/.well-known/openid-configuration
+      - spring.security.oauth2.client.registration.auth0.client-id=P5ePbyjmq6xLc09ZxshMaqkwcNmVbKNX
+      - spring.security.oauth2.client.registration.auth0.client-secret=Z_-IVcH2g8uu1Euz63EbDtT6ZHlJ5P681-3wOwQHMyq-M_X9WuHqZzihKFX_hmt1
+      - spring.web.cors.allowed-origins=http://localhost:3000,http://localhost:8080
       - spring.web.cors.allowed-methods=GET,POST,PUT,DELETE,OPTIONS
       - spring.web.cors.allowed-headers=*
       - spring.web.cors.allow-credentials=true
@@ -41,12 +45,8 @@ services:
     depends_on:
       postgresql:
         condition: service_healthy
-      keycloak:
-        condition: service_healthy
   postgresql:
     image: postgres:16.1
-    # volumes:
-    #   - ~/volumes/jhipster/taleApp/postgresql/:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=taleApp
       - POSTGRES_PASSWORD=taleApp
@@ -56,11 +56,5 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
-    # If you want to expose these ports outside your dev PC,
-    # remove the "127.0.0.1:" prefix
     ports:
       - 127.0.0.1:5432:5432
-  keycloak:
-    extends:
-      file: ./keycloak.yml
-      service: keycloak

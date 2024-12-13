@@ -40,9 +40,10 @@ public class WebConfigurer implements ServletContextInitializer, WebMvcConfigure
         registry.addMapping("/api/**")
             .allowedOrigins("http://localhost:3000") // Make sure this matches your client origin
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-            .allowedHeaders("*") // Allow all headers
-            .allowCredentials(true); // If you need to include credentials
+            .allowedHeaders("Authorization", "Content-Type", "X-Requested-With")
+            .allowCredentials(true);
     }
+
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
@@ -85,6 +86,20 @@ public class WebConfigurer implements ServletContextInitializer, WebMvcConfigure
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                    .allowedOrigins("http://localhost:3000")
+                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                    .allowedHeaders("*")
+                    .allowCredentials(true);
+            }
+        };
     }
 
 }

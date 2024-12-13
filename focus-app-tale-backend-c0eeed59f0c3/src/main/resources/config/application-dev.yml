@@ -19,6 +19,9 @@ logging:
     tech.jhipster: DEBUG
     org.hibernate.SQL: DEBUG
     com.tale: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+    org.springframework.security.oauth2.server.resource.authentication: TRACE
 
 spring:
   devtools:
@@ -41,30 +44,30 @@ spring:
 
   security:
     oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-8ja5z27gacw183vf.eu.auth0.com/
+          jwk-set-uri: https://dev-8ja5z27gacw183vf.eu.auth0.com/.well-known/jwks.json
+          audience: http://localhost/api
+          jws-algorithms: RS256
       client:
         registration:
           auth0:
-            client-id: YOUR_AUTH0_CLIENT_ID
-            client-secret: YOUR_AUTH0_CLIENT_SECRET
-            provider: auth0
-            scope: openid profile email
+            client-id: P5ePbyjmq6xLc09ZxshMaqkwcNmVbKNX
+            client-secret: Z_-IVcH2g8uu1Euz63EbDtT6ZHlJ5P681-3wOwQHMyq-M_X9WuHqZzihKFX_hmt1  # Replace with your actual client secret
+            scope:
+              - openid
+              - profile
+              - email
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            authorization-grant-type: authorization_code
         provider:
           auth0:
-            authorization-uri: https://YOUR_AUTH0_DOMAIN/authorize
-            token-uri: https://YOUR_AUTH0_DOMAIN/oauth/token
-            user-info-uri: https://YOUR_AUTH0_DOMAIN/userinfo
-            user-name-attribute: preferred_username
+            issuer-uri: https://dev-8ja5z27gacw183vf.eu.auth0.com/
+            authorization-uri: https://dev-8ja5z27gacw183vf.eu.auth0.com/authorize
+            token-uri: https://dev-8ja5z27gacw183vf.eu.auth0.com/oauth/token
+            user-info-uri: https://dev-8ja5z27gacw183vf.eu.auth0.com/userinfo
+            jwk-set-uri: https://dev-8ja5z27gacw183vf.eu.auth0.com/.well-known/jwks.json
 
-  #        provider:
-#          oidc:
-#            issuer-uri: http://localhost:9080/realms/jhipster
-#        registration:
-#          oidc:
-#            client-id: tale
-#            client-secret: 86a4RPOrgq6UNSwOJ0xMOGI5aiheCyKs
-#            scope: openid, profile, email, offline_access # last one for refresh tokens
 
   web:
     cors:

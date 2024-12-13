@@ -5,6 +5,7 @@ import com.tale.repository.SurveyRepository;
 import com.tale.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,8 +27,8 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.tale.domain.Survey}.
  */
-@RestController
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
+@RestController
 @RequestMapping("/api/surveys")
 @Transactional
 //@CrossOrigin(origins = "http://localhost:3000")
@@ -54,12 +55,20 @@ public class SurveyResource {
         if (survey.getId() != null) {
             throw new BadRequestAlertException("A new survey cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        // If image is Base64 encoded, decode it
+        if (survey.getImage() != null && survey.getImage().length == 0) {
+            byte[] decodedImage = Base64.getDecoder().decode(survey.getImage());
+            survey.setImage(decodedImage);
+        }
+
         Survey result = surveyRepository.save(survey);
         return ResponseEntity
             .created(new URI("/api/surveys/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Survey> updateSurvey(@PathVariable(value = "id", required = false) final Long id, @RequestBody Survey survey)

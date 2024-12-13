@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.lang.Nullable;
 
 /**
  * A Survey.
@@ -32,6 +34,10 @@ public class Survey implements Serializable {
 
     @Column(name = "title")
     private String title;
+
+    @Nullable
+    @Column(name = "image")
+    private byte[] image;
 
     @Column(name = "description")
     private String description;
@@ -168,6 +174,15 @@ public class Survey implements Serializable {
 
     public void setStartDate(ZonedDateTime startDate) {
         this.startDate = startDate;
+    }
+
+    public byte[] getImage() {
+        return this.image;
+    }
+    // New method to return image as a Base64 encoded string
+
+    public void setImage(byte[] imageData) {
+        this.image = imageData;
     }
 
     public ZonedDateTime getEndDate() {

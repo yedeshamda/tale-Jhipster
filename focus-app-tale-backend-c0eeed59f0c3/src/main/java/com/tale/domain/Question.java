@@ -7,6 +7,7 @@ import java.util.*;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.lang.Nullable;
 
 /**
  * A Question.
@@ -45,8 +46,10 @@ public class Question implements Serializable {
     @Column(name = "answer_type")
     private String answerType;
 
+    @Nullable
     @Column(name = "files")
-    private String filesString;  // Store files as a comma-separated string of file paths or IDs
+    private byte[] files;
+
 
     @Column(name = "generate_responses")
     private Boolean generateResponses;
@@ -158,20 +161,13 @@ public class Question implements Serializable {
         this.optionsString = options != null ? String.join(",", options) : null;
     }
 
-//    public List<String> getFiles() {
-//        return filesString != null ? Arrays.asList(filesString.split(",")) : List.of();
-//    }
-//
-//    public void setFiles(List<String> files) {
-//        this.filesString = files != null ? String.join(",", files) : null;
-//    }
-
-    public String getFile() {
-        return filesString;  // Returns a single file as a string
+    // Getter and Setter for fileData
+    public byte[] getFile() {
+        return files;
     }
 
-    public void setFile(String file) {
-        this.filesString = file;  // Accept a single file string (file name, path, or YouTube ID)
+    public void setFile(byte[] fileData) {
+        this.files = fileData;
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
